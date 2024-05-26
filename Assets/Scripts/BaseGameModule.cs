@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BaseGameModule : MonoBehaviour
 {
-    //private void Awake() { }
-    //private void Start() { }
-    //private void Update() { }
-    //private void OnDestroy() { }
+    private void Awake() { }
+    private void Start() { }
+    private void Update() { }
+    private void OnDestroy() { }
 
     protected internal virtual void OnModuleInit() { }
     protected internal virtual void OnModuleStart() { }

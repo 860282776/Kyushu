@@ -7,10 +7,15 @@ using UnityEngine;
 
 public class MessageModule : BaseGameModule
 {
+    public delegate Task MessageHandlerEventArgs<T>(T arg);
+
     private Dictionary<Type, List<object>> globalMessageHandlers;
+    private Dictionary<Type, List<object>> localMessageHandlers;
+
     protected internal override void OnModuleInit()
     {
         base.OnModuleInit();
+        localMessageHandlers = new Dictionary<Type, List<object>>();
         LoadAllMessageHandlers();
     }
 
@@ -31,9 +36,25 @@ public class MessageModule : BaseGameModule
             }
         }
     }
-    public async Task Post<T>(T arg)where T : struct
+    public void Subscribe<T>(MessageHandlerEventArgs<T> handler)
     {
-        if(globalMessageHandlers.TryGetValue(typeof(T),out List<object> globalHandlerList))
+        Type argType = typeof(T);
+        if(!localMessageHandlers.TryGetValue(argType,out var handlerList))
+        {
+            handlerList = new List<object>();
+            localMessageHandlers.Add(argType, handlerList);
+        }
+        handlerList.Add(handler);
+    }
+    public void Unsubscribe<T>(MessageHandlerEventArgs<T> handler)
+    {
+        if (!localMessageHandlers.TryGetValue(typeof(T), out var handlerList))
+            return;
+        handlerList.Remove(handler);
+    }
+    public async Task Post<T>(T arg) where T : struct
+    {
+        if (globalMessageHandlers.TryGetValue(typeof(T), out List<object> globalHandlerList))
         {
             foreach (var handler in globalHandlerList)
             {
@@ -41,6 +62,20 @@ public class MessageModule : BaseGameModule
                     continue;
                 await messageHandler.HandleMessage(arg);
             }
+        }
+
+        if (localMessageHandlers.TryGetValue(typeof(T), out List<object> localHandlerList))
+        {
+            List<object> list = ListPool<object>.Obtain();
+            list.AddRangeNonAlloc(localHandlerList);
+            foreach (var handler in list)
+            {
+                if (!(handler is MessageHandlerEventArgs<T> messageHandler))
+                    continue;
+
+                await messageHandler(arg);
+            }
+            ListPool<object>.Release(list);
         }
     }
 }
