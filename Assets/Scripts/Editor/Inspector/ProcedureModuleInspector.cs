@@ -21,7 +21,6 @@ namespace TGame.Editor.Inspector
             //表示被检查的对象或对象的 SerializedObject
             proceduresProperty = serializedObject.FindProperty("proceduresNames");
             defaultProcedureProperty = serializedObject.FindProperty("defaultProcedureName");
-
             UpdateProcedures();
         }
 
