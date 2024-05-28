@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using TGame.UI;
 public class GameManager : MonoBehaviour
 {
     /// <summary>
@@ -14,8 +15,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     [Module(2)]
     public static ProcedureModule Procedure { get => TGameFramework.Instance.GetModule<ProcedureModule>(); }
-    //[Module(3)]
-    //public static UIModule UI { get => TGameFramework.Instance.GetModule<UIModule>(); }
+    [Module(3)]
+    public static UIModule UI { get => TGameFramework.Instance.GetModule<UIModule>(); }
 
     //[Module(4)]
     //public static TimeModule Time { get => TGameFramework.Instance.GetModule<TimeModule>(); }

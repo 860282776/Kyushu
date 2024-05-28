@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 91b458fd9b01ab94eafc7494605a2af4
+  m_SerializeEntries:
+  - m_GUID: 730bc874b5ec34b438b2347e00a458b8
+    m_Address: Assets/BundleAssets/UI/LoginUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4a0f0e897e953fb4090e825fee320b58
+    m_Address: Assets/BundleAssets/Config/UIConfig.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5a685aae3d9a2dc44ba1b403256d4749, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dfe23c844ca07c845be5e2c1c441962a, type: 2}
+    - {fileID: 11400000, guid: ded94d32b783b7b47ae4037b102b09a7, type: 2}

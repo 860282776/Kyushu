@@ -1,0 +1,38 @@
+[
+  {
+    "ID": 1,
+    "Description": "LoginUI",
+    "Asset": "Assets/BundleAssets/UI/LoginUI.prefab",
+    "Mode": 0
+  },
+  {
+    "ID": 2,
+    "Description": "LobbyUI",
+    "Asset": "Assets/BundleAssets/UI/LobbyUI.prefab",
+    "Mode": 0
+  },
+  {
+    "ID": 3,
+    "Description": "BattleUI",
+    "Asset": "Assets/BundleAssets/UI/BattleUI.prefab",
+    "Mode": 0
+  },
+  {
+    "ID": 4,
+    "Description": "LoadingUI",
+    "Asset": "Assets/BundleAssets/UI/LoadingUI.prefab",
+    "Mode": 1
+  },
+  {
+    "ID": 5,
+    "Description": "KnapsackUI",
+    "Asset": "Assets/BundleAssets/UI/KnapsackUI.prefab",
+    "Mode": 0
+  },
+  {
+    "ID": 6,
+    "Description": "TaskUI",
+    "Asset": "Assets/BundleAssets/UI/TaskUI.prefab",
+    "Mode": 0
+  }
+]
