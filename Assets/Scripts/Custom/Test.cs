@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class Test : MonoBehaviour
             GameManager.Message.Subscribe<MessageType.Login>(async (msg) =>
             {
                 Debug.Log("本地消息触发");
+                await Task.Yield();
             });
             GameManager.Procedure.ChangeProcedure<LoginProcedure>().Coroutine();
         });

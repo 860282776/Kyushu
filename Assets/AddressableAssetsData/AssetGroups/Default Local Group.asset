@@ -17,12 +17,16 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 91b458fd9b01ab94eafc7494605a2af4
   m_SerializeEntries:
-  - m_GUID: 730bc874b5ec34b438b2347e00a458b8
-    m_Address: Assets/BundleAssets/UI/LoginUI.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 4a0f0e897e953fb4090e825fee320b58
     m_Address: Assets/BundleAssets/Config/UIConfig.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6cb797213c576d547bcf748b7e1e3b46
+    m_Address: Assets/BundleAssets/Prefabs/GameManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 730bc874b5ec34b438b2347e00a458b8
+    m_Address: Assets/BundleAssets/UI/LoginUI.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -46,7 +46,7 @@ namespace TGame.UI
         {
             if (MEDIATOR_MAPPING != null)
                 return;
-
+             
             MEDIATOR_MAPPING = new Dictionary<UIViewID, Type>();
             ASSET_MAPPING = new Dictionary<UIViewID, Type>();
 

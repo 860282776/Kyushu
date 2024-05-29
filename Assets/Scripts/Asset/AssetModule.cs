@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace TGame.Asset
 {
-    [Beebyte.Obfuscator.Skip]
+    //[Beebyte.Obfuscator.Skip]
     public partial class AssetModule : BaseGameModule
     {
 #if UNITY_EDITOR
