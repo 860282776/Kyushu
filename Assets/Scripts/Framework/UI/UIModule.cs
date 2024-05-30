@@ -34,7 +34,7 @@ namespace TGame.UI
             quantumConsole.OnActivate += OnConsoleActive;
             quantumConsole.OnDeactivate += OnConsoleDeactive;
         }
-
+        
         protected internal override void OnModuleStop()
         {
             base.OnModuleStop();
@@ -61,7 +61,7 @@ namespace TGame.UI
                     object[] attrs = type.GetCustomAttributes(typeof(UIViewAttribute), false);
                     if (attrs.Length == 0)
                     {
-                        //UnityLog.Error($"{type.FullName} 没有绑定 Mediator，请使用UIMediatorAttribute绑定一个Mediator以正确使用");
+                        UnityLog.Error($"{type.FullName} 没有绑定 Mediator，请使用UIMediatorAttribute绑定一个Mediator以正确使用");
                         continue;
                     }
 
@@ -273,7 +273,7 @@ namespace TGame.UI
         {
             if (uiObject == null)
             {
-                //UnityLog.Error($"加载UI失败:{uiConfig.Asset}");
+                UnityLog.Error($"加载UI失败:{uiConfig.Asset}");
                 RecycleMediator(mediator);
                 return null;
             }
@@ -281,7 +281,7 @@ namespace TGame.UI
             UIView view = uiObject.GetComponent<UIView>();
             if (view == null)
             {
-                //UnityLog.Error($"UI Prefab不包含UIView脚本:{uiConfig.Asset}");
+                UnityLog.Error($"UI Prefab不包含UIView脚本:{uiConfig.Asset}");
                 RecycleMediator(mediator);
                 uiObjectPool.UnloadGameObject(view.gameObject);
                 return null;
