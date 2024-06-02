@@ -31,7 +31,7 @@ public class LaunchProcedure : BaseProcedure
         //BulletConfig.ParseConfig();
         //SpellFieldConfig.ParseConfig();
         //I18NConfig.ParseConfig();
-
+        
         await Task.Yield();
         //UnityLog.Info("<===ÅäÖÃ¼ÓÔØÍê±Ï");
     }

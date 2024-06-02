@@ -22,30 +22,49 @@ public partial class ProcedureModule : BaseGameModule
     protected internal override void OnModuleInit()
     {
         base.OnModuleInit();
+        // 初始化 procedures 字典，用于存储所有的流程类型及其实例
         procedures = new Dictionary<Type, BaseProcedure>();
+        // 标记是否找到默认状态的流程
         bool findDefaultState = false;
+
+        // 遍历所有流程名称
         for (int i = 0; i < proceduresNames.Length; i++)
         {
+            // 获取当前流程名称
             string procedureTypeName = proceduresNames[i];
+
+            // 如果流程名称为空，跳过当前循环
             if (string.IsNullOrEmpty(procedureTypeName))
                 continue;
-            //获取具有指定名称的 Type，指定是否执行区分大小写的搜索，以及在找不到类型时是否引发异常。
+
+            // 获取具有指定名称的 Type，指定是否执行区分大小写的搜索，以及在找不到类型时是否引发异常
             Type procedureType = Type.GetType(procedureTypeName, true);
+
+            // 如果没有找到对应的 Type，输出错误日志并跳过当前循环
             if (procedureType == null)
             {
                 Debug.LogError($"Can't find procedure:`{procedureTypeName}`");
                 continue;
             }
+
+            // 使用反射创建流程实例
             BaseProcedure procedure = Activator.CreateInstance(procedureType) as BaseProcedure;
+
+            // 判断当前流程是否为默认状态
             bool isDefaultState = procedureTypeName == defaultProcedureName;
+
+            // 将流程类型和实例添加到 procedures 字典中
             procedures.Add(procedureType, procedure);
 
+            // 如果当前流程是默认状态，设置 defaultProcedure 并标记已找到默认状态
             if (isDefaultState)
             {
                 defaultProcedure = procedure;
                 findDefaultState = true;
             }
         }
+
+        // 如果没有找到默认状态的流程，输出错误日志
         if (!findDefaultState)
         {
             Debug.LogError($"You have to set a correct default procedure to start game");

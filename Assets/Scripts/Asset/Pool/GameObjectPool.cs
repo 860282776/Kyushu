@@ -13,26 +13,50 @@ namespace TGame.Asset
 
         public T LoadGameObject(string path, Action<GameObject> createNewCallback = null)
         {
+            // 获取路径的哈希值
             int hash = path.GetHashCode();
+
+            // 尝试从 gameObjectPool 中获取哈希值对应的队列
             if (!gameObjectPool.TryGetValue(hash, out Queue<T> q))
             {
+                // 如果没有找到对应的队列，则创建一个新的队列并添加到 gameObjectPool 中
                 q = new Queue<T>();
                 gameObjectPool.Add(hash, q);
             }
+
+            // 如果队列中没有可用的对象
             if (q.Count == 0)
             {
+                // 同步加载指定路径的预制体
                 GameObject prefab = Addressables.LoadAssetAsync<GameObject>(path).WaitForCompletion();
+
+                // 实例化预制体对象
                 GameObject go = UnityEngine.Object.Instantiate(prefab);
+
+                // 给实例化的对象添加组件 T，并获取该组件
                 T asset = go.AddComponent<T>();
+
+                // 如果创建新对象时有回调函数，则调用回调函数
                 createNewCallback?.Invoke(go);
+
+                // 设置组件的 ID 为路径的哈希值
                 asset.ID = hash;
+
+                // 将对象设置为不活跃状态
                 go.SetActive(false);
+
+                // 将新创建的对象加入队列中
                 q.Enqueue(asset);
             }
 
+            // 从队列中取出一个对象
             {
                 T asset = q.Dequeue();
+
+                // 调用 OnGameObjectLoaded 方法，表示对象已加载
                 OnGameObjectLoaded(asset);
+
+                // 返回对象
                 return asset;
             }
         }

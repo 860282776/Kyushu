@@ -90,28 +90,46 @@ public class GameManager : MonoBehaviour
 
     public void StartupModules()
     {
+        // 初始化一个列表用于存储 ModuleAttribute 实例
         List<ModuleAttribute> moduleAttrs = new List<ModuleAttribute>();
+
+        // 获取当前类型的所有属性，包括公有、非公有和静态属性
         PropertyInfo[] propertyInfos = GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+
+        // 获取 BaseGameModule 类型
         Type baseCompType = typeof(BaseGameModule);
+
+        // 遍历所有属性信息
         for (int i = 0; i < propertyInfos.Length; i++)
         {
             PropertyInfo property = propertyInfos[i];
+
+            // 检查属性的类型是否为 BaseGameModule 或其子类
             if (!baseCompType.IsAssignableFrom(property.PropertyType))
                 continue;
 
+            // 获取属性上的所有 ModuleAttribute 特性
             object[] attrs = property.GetCustomAttributes(typeof(ModuleAttribute), false);
+
+            // 如果没有 ModuleAttribute 特性，跳过当前属性
             if (attrs.Length == 0)
                 continue;
 
+            // 在子对象中获取属性类型的组件
             Component comp = GetComponentInChildren(property.PropertyType);
+
+            // 如果组件未找到，输出错误日志并跳过当前属性
             if (comp == null)
             {
-                Debug.LogError($"Can't Find GameModule:{property.PropertyType}");
+                Debug.LogError($"Can't Find GameModule: {property.PropertyType}");
                 continue;
             }
 
+            // 获取第一个 ModuleAttribute 特性并设置其 Module 属性
             ModuleAttribute moduleAttr = attrs[0] as ModuleAttribute;
             moduleAttr.Module = comp as BaseGameModule;
+
+            // 将特性添加到 moduleAttrs 列表中
             moduleAttrs.Add(moduleAttr);
         }
 
